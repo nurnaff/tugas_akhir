@@ -60,11 +60,21 @@ dan hasilnya pada tabel ``` ratings.csv ```
 
 ![rati3](https://github.com/user-attachments/assets/719ef532-20e1-42da-96c1-73febbf60892)
 
-Dalam perintah berikut:
+Mengecek bentuk baris dan kolom dari tabel ``` movies.csv ```, fungsinya: ``` shape ```. Hasil dari tabel ```movies.csv```
+
+![movie8](https://github.com/user-attachments/assets/b45dcf9d-fa98-45de-b41f-229c96fef278)
+
+Hasil dari tabel ``` ratings.csv ```
+
+![rati4](https://github.com/user-attachments/assets/79a94001-9a0d-4d8f-a184-ea448d9c3c23)
+
+## Data Preparation
+
+Kolom genres mempunyai isi yang bervariasi dan double, seperti dalam perintah berikut:
 
 ![movie4](https://github.com/user-attachments/assets/efcd679b-19b1-4d78-ae48-27e8bf73c026)
 
-Menghasilkan bahwa kolom ``` genres ``` pada tabel ``` movies.csv ``` terdapat lebih dari 1 jenis/kategori dengan dihubungkan tanda ``` | ```. Sehingga dilakukan proses satu judul movie hanya ada satu jenis genres dengan fungsi.
+Menghasilkan: kolom ``` genres ``` pada tabel ``` movies.csv ``` terdapat lebih dari 1 jenis/kategori dengan dihubungkan tanda ``` | ```. Sehingga dilakukan proses satu judul movie hanya ada satu jenis genres dengan fungsi.
 
 ``` dt['genres']=dt['genres'].str.split('|').str[0] ```. Hasilnya
 
@@ -82,4 +92,41 @@ Menghilangkan tanda baca ``` - ``` pada kolom genres ``` Sci-Fi ``` dan ``` Film
 
 ![movie7](https://github.com/user-attachments/assets/fbf74b72-1e80-48e7-adec-8b5288b937f6)
 
+Mengecek kolom yang isi barisnya kurang dari 10.
+
+![movie16](https://github.com/user-attachments/assets/564bbd53-9058-4f88-a06c-25bda19743b1)
+
+Menghapus baris yang jumlah kurang dari 10 adalah ```imax``` dengan jumlah hanya 1, dengan fungsi 
+```dt=dt[~dt['genres'].str.contains('IMAX')]``` dan hasil:
+
+![movie17](https://github.com/user-attachments/assets/aceb90b6-e40b-440d-af91-a59f79612663)
+
+
+Melakukan konversi data series menjadi list, dengan menggunakan fungsi ``` tolist() ```.
+
+![movie9](https://github.com/user-attachments/assets/7fa23196-e5b3-4725-bb54-3292da21b8f0)
+
+Tahap selanjutnya menjadikan data ke bentuk dictionary. 
+
+![movie10](https://github.com/user-attachments/assets/3129b6ec-43a2-4aee-a7cb-9bde34403b81)
+
+Bentuk dari data setelah di dictionary adalah:
+![movie11](https://github.com/user-attachments/assets/91002751-b60f-4e36-b36e-f06888ec4aab)
+
+## Membuat Model
+Model yang dibangun adalah sistem rekomendasi dengan pendekatan content based filtering. Model yang dibagun adalah sistem rekomendasi movie berdasarkan jenis genres yang ada dalam tabel ``` movies.csv ```. Fungsi TF-IDF Vectorizer digunakan pada sistem rekomendasi untuk menemukan representasi fitur penting dari setiap genres movie. Tahap ```tfidfvectorizer()```, menghasilkan:
+
+![movie12](https://github.com/user-attachments/assets/39d85478-aa1c-4e73-9ccb-73121600f244)
+
+Kemudian hasil dari fungsi ```tfidfvectorizer()``` dibentuk ke matriks, hasilnya:
+
+![movie13](https://github.com/user-attachments/assets/b1f59d10-5763-42f0-a4c0-ab84df2ad29b)
+
+Matriks yang didapatkan berukuran ```(57361,19)```. 57361 merupakan jumlah baris, dan 19 merupakan genres movie. Selanjutnya cara menghasilkan vektor tf-idf dalam bentuk matriks menggunakan fungsi ```todense()```, hasilnya:
+
+![movie14](https://github.com/user-attachments/assets/9dc384db-022a-4286-b2e2-c4c7e0275ead)
+
+Hasil dari matriks ```todense()``` dijadikan dalam bentuk DataFrame, seperti ini:
+
+![movie15](https://github.com/user-attachments/assets/be1f6230-8727-4743-ae1f-15366f4a1535)
 
