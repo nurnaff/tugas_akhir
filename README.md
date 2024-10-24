@@ -11,11 +11,9 @@ Proyek ini menangani data dalam jumlah besar dan menyaring informasi yang bergun
 - Solution statements, untuk memberikan rekomendasi berdasarkan data movie yang ditonton pengguna dan rating.
 
 ## Data Understanding
-Dataset ini diambil dari [kaggle](https://www.kaggle.com/datasets/parasharmanas/movie-recommendation-system).
-Dalam dataset terdapat dua tabel, yaitu movies.csv, dan ratings.csv
+Dataset ini diambil dari [kaggle](https://www.kaggle.com/datasets/parasharmanas/movie-recommendation-system). Dalam dataset terdapat dua tabel, yaitu movies.csv, dan ratings.csv
 
-Tabel ``` movies.csv ```
-terdapat 62423 baris, dan 3 kolom. Terdiri dari:
+Tabel ``` movies.csv ```, terdapat 62423 baris, dan 3 kolom. Terdiri dari:
 
 ``` movieId ``` sebagai kolom Id movie.
 
@@ -31,8 +29,7 @@ Hasilnya:
 
 ![movie1](https://github.com/user-attachments/assets/f73cf29a-f883-4cbd-8487-6f2346b9dd10)
 
-Tabel ``` ratings.csv ```
-terdapat 25000095 baris, dan 3 kolom. Terdiri dari:
+Tabel ``` ratings.csv ```, terdapat 25000095 baris, dan 3 kolom. Terdiri dari:
 
 ``` userId ``` sebagai kolom Id user.
 
@@ -50,27 +47,21 @@ Hasilnya:
 
 ![rati1](https://github.com/user-attachments/assets/daefebd8-513f-4447-9c7c-fdb68322525d)
 
-Mengecek data yang kosong adalah ``` isnull().sum() ``` 
-dan data pada tabel ``` movies.csv ``` tidak ada yang kosong, ini hasilnya
+Mengecek data yang kosong adalah ``` isnull().sum() ```, dan data pada tabel ``` movies.csv ``` dan ``` ratings.csv ``` tidak ada yang kosong, ini hasilnya
 
 ![movie2](https://github.com/user-attachments/assets/111a56d6-6d01-43c1-bf65-9820a3d2d68a)
 
-dan pada tabel ``` ratings.csv ``` tidak ada yang kosong, ini hasilnya
-
 ![rati2](https://github.com/user-attachments/assets/669fc21c-92f8-4b78-857e-c79a12749595)
 
-Mengecek data yang duplikat adalah ``` duplicated().sum() ```
-dan hasilnya dikedua tabel ``` movies.csv ``` dan ``` ratings.csv ``` nilainya 0, ini hasilnya
+Mengecek data yang duplikat adalah ``` duplicated().sum() ```, dan hasilnya dikedua tabel ``` movies.csv ``` dan ``` ratings.csv ``` nilainya 0, ini hasilnya
 
 ``` Data yang duplikat:  0 ```
 
-Mengecek data yang unik adalah ``` nunique() ```
-
-dan hasilnya pada tabel ``` movies.csv ``` 
+Mengecek data yang unik adalah ``` nunique() ```, dan hasilnya pada tabel ``` movies.csv ``` 
 
 ![movie3](https://github.com/user-attachments/assets/2357ae47-81b2-45c6-a1ea-7b392bad0f13)
 
-dan hasilnya pada tabel ``` ratings.csv ```
+Dan hasilnya fungsi ``` nunique() ``` pada tabel ``` ratings.csv ```
 
 ![rati3](https://github.com/user-attachments/assets/719ef532-20e1-42da-96c1-73febbf60892)
 
@@ -103,34 +94,42 @@ Hasil dari tabel ``` ratings.csv ```
 ![rati4](https://github.com/user-attachments/assets/79a94001-9a0d-4d8f-a184-ea448d9c3c23)
 
 ## Data Preparation
+Kolom judul ``` title ``` movie terdapat yang duplikat, sehingga dilakukan pengecekan dengan perintah dan hasil:
 
-Kolom genres mempunyai isi yang bervariasi dan double, seperti dalam perintah berikut:
+![Screenshot 2024-10-24 140857](https://github.com/user-attachments/assets/952779cb-2979-4264-a948-b777deaa406f)
 
-![movie4](https://github.com/user-attachments/assets/efcd679b-19b1-4d78-ae48-27e8bf73c026)
+Proses menghapus dengan fungsi dan hasil sebagai berikut: (jumlah baris berubah)
+
+![Screenshot 2024-10-24 141015](https://github.com/user-attachments/assets/81088c6c-2e47-43b1-858a-cd8ac65416b3)
+
+Kolom genres mempunyai isi yang bervariasi dengan satu judul ``` title ``` movie terdapat banyak genres yang dihubungkan dengan tanda baca ``` | ```, seperti berikut:
+
+![Screenshot 2024-10-24 141238](https://github.com/user-attachments/assets/aaf06c4b-dc9e-46b3-aeed-66f9e800d431)
 
 Menghasilkan: kolom ``` genres ``` pada tabel ``` movies.csv ``` terdapat lebih dari 1 jenis/kategori dengan dihubungkan tanda ``` | ```. Sehingga dilakukan proses satu judul movie hanya ada satu jenis genres dengan fungsi.
 
 ``` dt['genres']=dt['genres'].str.split('|').str[0] ```. Hasilnya
 
-![movie5](https://github.com/user-attachments/assets/a61634aa-8d98-43e1-a5b8-f25223889af9)
+![Screenshot 2024-10-24 141301](https://github.com/user-attachments/assets/4c04fcdd-e83f-4ee9-918b-9e904b436a0d)
 
 Karena data pada genres terdapat isi 'no genres listed' sehingga dilakukan penghapusan, dengan fungsi:
 
 ``` dt.drop(dt[dt['genres']=='(no genres listed)'].index,inplace=True) ```. Hasilnya
 
-![movie6](https://github.com/user-attachments/assets/aa867ffe-6aee-481d-a36f-e4f43425e944)
+![Screenshot 2024-10-24 141446](https://github.com/user-attachments/assets/f94f417f-2b66-42b6-b5be-47be8e3f547e)
 
 Menghilangkan tanda baca ``` - ``` pada kolom genres ``` Sci-Fi ``` dan ``` Film-Noir ``` menggunakan fungsi:
 
 ``` dt['genres']=dt['genres'].replace({'Sci-Fi':'SciFi','Film-Noir':'FilmNoir'}) ```. Hasilnya
 
-![movie7](https://github.com/user-attachments/assets/fbf74b72-1e80-48e7-adec-8b5288b937f6)
+![Screenshot 2024-10-24 141503](https://github.com/user-attachments/assets/8386f2e6-1ebd-4d48-ae59-3a619eb95313)
 
-Mengecek kolom yang isi barisnya kurang dari 10.
 
-![movie16](https://github.com/user-attachments/assets/564bbd53-9058-4f88-a06c-25bda19743b1)
+Mengecek kolom yang isi barisnya kurang dari 10000.
 
-Menghapus baris yang jumlah kurang dari 10 adalah ```imax``` dengan jumlah hanya 1, dengan fungsi 
+
+
+Menghapus baris yang jumlah 1 dan lebih dari 10000 adalah ```imax``` dengan jumlah hanya 1, dengan fungsi 
 ```dt=dt[~dt['genres'].str.contains('IMAX')]``` dan hasil:
 
 ![movie17](https://github.com/user-attachments/assets/aceb90b6-e40b-440d-af91-a59f79612663)
