@@ -15,7 +15,13 @@ Dataset ini diambil dari [kaggle](https://www.kaggle.com/datasets/parasharmanas/
 Dalam dataset terdapat dua tabel, yaitu movies.csv, dan ratings.csv
 
 Tabel ``` movies.csv ```
-terdapat 62423 baris, dan 3 kolom.
+terdapat 62423 baris, dan 3 kolom. Terdiri dari:
+
+``` movieId ``` sebagai kolom Id movie.
+
+``` title ``` sebagai kolom judul movie.
+
+``` genres ``` sebagai kolom jenis genre movie.
 
 Fungsi untuk melihat informasi tabel ``` movies.csv ``` adalah
 
@@ -26,9 +32,17 @@ Hasilnya:
 ![movie1](https://github.com/user-attachments/assets/f73cf29a-f883-4cbd-8487-6f2346b9dd10)
 
 Tabel ``` ratings.csv ```
-terdapat 25000095 baris, dan 3 kolom.
+terdapat 25000095 baris, dan 3 kolom. Terdiri dari:
 
-Fungsi untuk melihat informasi dari tabel ``` ratings.csv ``` adalah
+``` userId ``` sebagai kolom Id user.
+
+``` movieId ``` sebagai kolom Id movie.
+
+``` rating ``` sebagai kolom penilaian movie.
+
+``` timestamp ``` sebagai kolom waktu mengisi penilaian movie.
+
+Fungsi untuk melihat informasi dari tabel ``` ratings.csv ``` adalah 
 
 ``` rt.info() ```
 
