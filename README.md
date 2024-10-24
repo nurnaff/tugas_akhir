@@ -87,7 +87,7 @@ Hasil dari fungsi ``` describe() ``` adalah:
 
 Mengecek bentuk baris dan kolom dari tabel ``` movies.csv ```, fungsinya: ``` shape ```. Hasil dari tabel ```movies.csv```
 
-![movie8](https://github.com/user-attachments/assets/b45dcf9d-fa98-45de-b41f-229c96fef278)
+``` (62423,3) ```
 
 Hasil dari tabel ``` ratings.csv ```
 
@@ -108,43 +108,63 @@ Kolom genres mempunyai isi yang bervariasi dengan satu judul ``` title ``` movie
 
 Menghasilkan: kolom ``` genres ``` pada tabel ``` movies.csv ``` terdapat lebih dari 1 jenis/kategori dengan dihubungkan tanda ``` | ```. Sehingga dilakukan proses satu judul movie hanya ada satu jenis genres dengan fungsi.
 
-``` dt['genres']=dt['genres'].str.split('|').str[0] ```. Hasilnya
+``` dt_br['genres']=dt_br['genres'].str.split('|').str[0] ```. Hasilnya
 
 ![Screenshot 2024-10-24 141301](https://github.com/user-attachments/assets/4c04fcdd-e83f-4ee9-918b-9e904b436a0d)
 
 Karena data pada genres terdapat isi 'no genres listed' sehingga dilakukan penghapusan, dengan fungsi:
 
-``` dt.drop(dt[dt['genres']=='(no genres listed)'].index,inplace=True) ```. Hasilnya
+``` dt_br.drop(dt_br[dt_br['genres']=='(no genres listed)'].index,inplace=True) ```. Hasilnya
 
 ![Screenshot 2024-10-24 141446](https://github.com/user-attachments/assets/f94f417f-2b66-42b6-b5be-47be8e3f547e)
 
 Menghilangkan tanda baca ``` - ``` pada kolom genres ``` Sci-Fi ``` dan ``` Film-Noir ``` menggunakan fungsi:
 
-``` dt['genres']=dt['genres'].replace({'Sci-Fi':'SciFi','Film-Noir':'FilmNoir'}) ```. Hasilnya
+``` dt_br['genres']=dt_br['genres'].replace({'Sci-Fi':'SciFi','Film-Noir':'FilmNoir'}) ```. Hasilnya
 
 ![Screenshot 2024-10-24 141503](https://github.com/user-attachments/assets/8386f2e6-1ebd-4d48-ae59-3a619eb95313)
 
+Menampilkan grafik jumlah dari setiap jenis ``` genres ```. Fungsinya: ``` dt_br['genres'].value_counts().plot(kind='bar') ```. Hasilnya:
 
-Mengecek kolom yang isi barisnya kurang dari 10000.
+![Screenshot 2024-10-24 143327](https://github.com/user-attachments/assets/75d77736-d19a-45ef-a6ce-b3c4af72f441)
 
+Mengecek kolom yang isi barisnya kurang dari 2000. Karena jenis ``` genres ``` sangat bervariasi dengan jumlah data yang puluhan ribu, sehingga proyek ini hanya menggunakan data dengan ``` genres ``` yang lebih dari 1 dan kurang dari 2000.
 
+![Screenshot 2024-10-24 143409](https://github.com/user-attachments/assets/e6278bb5-d880-4d9f-8eb5-41e405532e6a)
 
-Menghapus baris yang jumlah 1 dan lebih dari 10000 adalah ```imax``` dengan jumlah hanya 1, dengan fungsi 
-```dt=dt[~dt['genres'].str.contains('IMAX')]``` dan hasil:
+Menghapus baris yang jumlah 1 dan lebih dari 2000 adalah ```imax``` dengan jumlah hanya 1, dengan fungsi 
 
-![movie17](https://github.com/user-attachments/assets/aceb90b6-e40b-440d-af91-a59f79612663)
+```dt_br=dt_br[~dt_br['genres'].str.contains('IMAX')]```
 
+```dt_br=dt_br[~dt_br['genres'].str.contains('Adventure')]```
+
+```dt_br=dt_br[~dt_br['genres'].str.contains('Comedy')]```
+
+```dt_br=dt_br[~dt_br['genres'].str.contains('Action')]```
+
+```dt_br=dt_br[~dt_br['genres'].str.contains('Drama')]```
+
+```dt_br=dt_br[~dt_br['genres'].str.contains('Crime')]```
+
+```dt_br=dt_br[~dt_br['genres'].str.contains('Documentary')]```
+
+```dt_br=dt_br[~dt_br['genres'].str.contains('Animation')]```
+
+```dt_br=dt_br[~dt_br['genres'].str.contains('Horror')]```
+
+![Screenshot 2024-10-24 143558](https://github.com/user-attachments/assets/930d5e0c-1aa1-4aa1-9830-03b36d9ffeed)
 
 Melakukan konversi data series menjadi list, dengan menggunakan fungsi ``` tolist() ```.
 
-![movie9](https://github.com/user-attachments/assets/7fa23196-e5b3-4725-bb54-3292da21b8f0)
+![Screenshot 2024-10-24 143613](https://github.com/user-attachments/assets/18d210cd-03a0-4391-91fa-a0836caab87d)
 
 Tahap selanjutnya menjadikan data ke bentuk dictionary. 
 
 ![movie10](https://github.com/user-attachments/assets/3129b6ec-43a2-4aee-a7cb-9bde34403b81)
 
 Bentuk dari data setelah di dictionary adalah:
-![movie11](https://github.com/user-attachments/assets/91002751-b60f-4e36-b36e-f06888ec4aab)
+
+``` (4736,3) ```
 
 ## Membuat Model
 Model yang dibangun adalah sistem rekomendasi dengan pendekatan content based filtering. Model yang dibagun adalah sistem rekomendasi movie berdasarkan jenis genres yang ada dalam tabel ``` movies.csv ```. Fungsi TF-IDF Vectorizer digunakan pada sistem rekomendasi untuk menemukan representasi fitur penting dari setiap genres movie. Tahap ```tfidfvectorizer()```, menghasilkan:
@@ -153,9 +173,9 @@ Model yang dibangun adalah sistem rekomendasi dengan pendekatan content based fi
 
 Kemudian hasil dari fungsi ```tfidfvectorizer()``` dibentuk ke matriks, hasilnya:
 
-![movie13](https://github.com/user-attachments/assets/b1f59d10-5763-42f0-a4c0-ab84df2ad29b)
 
-Matriks yang didapatkan berukuran ```(57361,19)```. 57361 merupakan jumlah baris, dan 19 merupakan genres movie. Selanjutnya cara menghasilkan vektor tf-idf dalam bentuk matriks menggunakan fungsi ```todense()```, hasilnya:
+
+Matriks yang didapatkan berukuran ```()```.  merupakan jumlah baris, dan  merupakan genres movie. Selanjutnya cara menghasilkan vektor tf-idf dalam bentuk matriks menggunakan fungsi ```todense()```, hasilnya:
 
 ![movie14](https://github.com/user-attachments/assets/9dc384db-022a-4286-b2e2-c4c7e0275ead)
 
