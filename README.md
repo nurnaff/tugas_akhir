@@ -193,3 +193,44 @@ Cosine similarity menghasilkan matriks kesamaan antar movie dalam bentuk array. 
 
 ![Screenshot 2024-10-24 162958](https://github.com/user-attachments/assets/c25a1586-7d6e-4551-b723-37533668f274)
 
+Selanjutnya dari data array cosine similarity di atas dapat digunakan sebagai proses rekomendasi movie yang mempunyai kesamaan. Proses rekomendasi berdasarkan movie yang pernah ditonton pengguna yang mempunyai kesamaan. Proses rekomendasi berdasarkan parameter judul movie (title), nilai kesamaan (cosine similarity), items (fitur judul movie yang mempunyai kesamaan), dan k (banyaknya movie yang direkomendasikan). Perintah mencari rekomendasi movie yang mirip dengan 'Shark Lake (2015)' seperti berikut:
+
+![Screenshot 2024-10-24 163712](https://github.com/user-attachments/assets/b9c66733-0893-4961-8a15-c234a66653ef)
+
+![Screenshot 2024-10-24 163824](https://github.com/user-attachments/assets/59046d6d-b4bd-45b8-8d91-12d40ac9d8fa)
+
+Berdasarkan hasil rekomendasi di atas, proyek ini akan menampilkan movie yang mempunyai genres yang mirip dengan movie yang dicari ``` 'Shark Lake (2015)' ```.
+
+## Model Collaborative Filtering
+Model ini memberikan rekomendasi berdasarkan nilai rating yang dimasukan pengguna. Berdasarkan nilai rating tersebut akan diolah untuk digunakan rekomendasi movie yang mirip serta pernah ditonton.
+- Tahap pertama: melakukan encode userId dan movieId ke bentuk angka (integer).
+  
+  ![Screenshot 2024-10-24 170309](https://github.com/user-attachments/assets/9c5322ad-24b6-479a-9ea0-7dd5ed269730)
+
+- Tahap kedua: hasil encode data userId dan movieId (berupa angka) dimasukkan ke dalam DataFrame.
+
+  ![Screenshot 2024-10-24 170325](https://github.com/user-attachments/assets/7753cfde-e664-4576-b3ff-14a6986f6656)
+
+- Tahap ketiga: menghitung jumlah user, movie, dan mengubah nilai rating dari String ke float
+
+  ![Screenshot 2024-10-24 170532](https://github.com/user-attachments/assets/64b62959-3faa-4154-825c-d6221a4dcd24)
+
+Hasil dari tahapan di atas kemudian digunakan sebagai data training dan testing, dengan pembagian data training 80% dari total data dan testing 20% dari seluruh data. Variabel input ``` (x) ``` adalah ``` user, movie ```, dan output atau target ``` (y) ``` adalah ``` rating ```.
+
+![Screenshot 2024-10-24 170905](https://github.com/user-attachments/assets/ea62e0e6-a0b4-408f-9933-2da092ed62d1)
+
+Proses training menggunakan ``` class RecommenderNet(Model) ```, dengan library ``` import tensorflow ``` dan ``` from tensorflow import keras ```. Model ini akan melakukan teknik embeding dengan menghitung nilai kecocokan antara user dan movie.
+
+![Screenshot 2024-10-24 171241](https://github.com/user-attachments/assets/dae7e626-e2a7-4830-a062-9e7bded0b92d)
+
+Parameter ``` compile ``` menggunakan ``` loss function ``` adalah ``` keras.losses.BinaryCrossentropy() ```, ``` optimizer ``` adalah ``` keras.optimizers.Adam(learning_rate=0.001) ```, dan matrics evaluasi adalah ``` keras.metrics.RootMeanSquaredError() ```.
+
+![Screenshot 2024-10-24 171536](https://github.com/user-attachments/assets/4e4db1fb-01f7-4877-a4f8-05403ec855bf)
+
+Tahap training membaca data sebanyak ``` batch_size=512 ``` dan melakukan perulangan epoch 10 kali.
+
+![Screenshot 2024-10-24 171702](https://github.com/user-attachments/assets/d1a7a991-8235-4715-af2b-81e5c70f4a28)
+
+Proses training dilakukan sekalian dengan evaluasi testing, dengan diagram evaluasi nilai ``` roor_mean_squared_error ``` sebagai berikut
+
+![Screenshot 2024-10-24 171831](https://github.com/user-attachments/assets/1591ceeb-fbcc-42e3-81da-4cbf9730e7ce)
