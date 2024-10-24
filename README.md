@@ -74,6 +74,26 @@ dan hasilnya pada tabel ``` ratings.csv ```
 
 ![rati3](https://github.com/user-attachments/assets/719ef532-20e1-42da-96c1-73febbf60892)
 
+Mengecek nilai statistik dari tabel ``` movies.csv ``` dan ``` ratings.csv ``` dengan fungsi: ``` describe() ```.
+
+``` count ``` menampilkan jumlah data/baris tabel.
+
+``` mean ``` menampilkan nilai rata-rata dari setiap kolom angka.
+
+``` std ``` menampilkan nilai standar deviasi dari setiap kolom angka.
+
+``` min ``` menampilkan nilai minimum dari setiap kolom angka.
+
+``` 25%, 50% 75% ``` menampilkan nilai kuartil 1 dan 3, serta median dari setiap kolom angka.
+
+``` max ``` menampilkan nilai maksimum dari setiap kolom angka.
+
+Hasil dari fungsi ``` describe() ``` adalah:
+
+![WhatsApp Image 2024-10-24 at 14 01 13](https://github.com/user-attachments/assets/93b78f5f-db10-4d78-9da6-4cfed36d0129)
+
+![WhatsApp Image 2024-10-24 at 14 01 28](https://github.com/user-attachments/assets/f5799875-f097-41da-b9c1-a14274556efd)
+
 Mengecek bentuk baris dan kolom dari tabel ``` movies.csv ```, fungsinya: ``` shape ```. Hasil dari tabel ```movies.csv```
 
 ![movie8](https://github.com/user-attachments/assets/b45dcf9d-fa98-45de-b41f-229c96fef278)
