@@ -171,11 +171,13 @@ Model yang dibangun adalah sistem rekomendasi dengan pendekatan content based fi
 
 ![movie12](https://github.com/user-attachments/assets/39d85478-aa1c-4e73-9ccb-73121600f244)
 
-Kemudian hasil dari fungsi ```tfidfvectorizer()``` dibentuk ke matriks, hasilnya:
+Kemudian hasil dari fungsi ```tfidfvectorizer()``` dibentuk ke matriks, perintanya:
 
+``` tfidf_matrix=tf.fit_transform(movie_data['jenis']) ```
 
+``` tfidf_matrix.shape ```, bentuknya menjadi ``` (4736,10) ```.
 
-Matriks yang didapatkan berukuran ```()```.  merupakan jumlah baris, dan  merupakan genres movie. Selanjutnya cara menghasilkan vektor tf-idf dalam bentuk matriks menggunakan fungsi ```todense()```, hasilnya:
+Matriks yang didapatkan berukuran ```(4736,10)```. 4736 merupakan jumlah baris, dan 10 merupakan genres movie. Selanjutnya cara menghasilkan vektor tf-idf dalam bentuk matriks menggunakan fungsi ```todense()```, hasilnya:
 
 ![movie14](https://github.com/user-attachments/assets/9dc384db-022a-4286-b2e2-c4c7e0275ead)
 
