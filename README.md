@@ -234,3 +234,9 @@ Tahap training membaca data sebanyak ``` batch_size=512 ``` dan melakukan perula
 Proses training dilakukan sekalian dengan evaluasi testing, dengan diagram evaluasi nilai ``` roor_mean_squared_error ``` sebagai berikut
 
 ![Screenshot 2024-10-24 171831](https://github.com/user-attachments/assets/1591ceeb-fbcc-42e3-81da-4cbf9730e7ce)
+
+Diagram loss dari proses training dan evaluasi adalah:
+
+![Screenshot 2024-10-24 172245](https://github.com/user-attachments/assets/747a61df-4638-41c9-aadb-35265c8af403)
+
+Bahwa dari diagram di atas, bahwa nilai ``` RMSE ``` saat training ataupun testing tidak mengalami perubahan yang signifikan (nilai diantara 0,44 sampai 0,45), sedangkan nilai ``` loss ``` saat training dan testing mengalami perubahan naik dari 2,778 sampai 6,659.
