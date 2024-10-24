@@ -202,7 +202,7 @@ Selanjutnya dari data array cosine similarity di atas dapat digunakan sebagai pr
 Berdasarkan hasil rekomendasi di atas, proyek ini akan menampilkan movie yang mempunyai genres yang mirip dengan movie yang dicari ``` 'Shark Lake (2015)' ```.
 
 ## Model Collaborative Filtering
-Model ini memberikan rekomendasi berdasarkan nilai rating yang dimasukan pengguna. Berdasarkan nilai rating tersebut akan diolah untuk digunakan rekomendasi movie yang mirip serta pernah ditonton.
+Model ini memberikan rekomendasi berdasarkan nilai rating yang dimasukan pengguna. Berdasarkan nilai rating tersebut akan diolah untuk digunakan rekomendasi movie yang mirip serta belum pernah ditonton.
 - Tahap pertama: melakukan encode userId dan movieId ke bentuk angka (integer).
   
   ![Screenshot 2024-10-24 170309](https://github.com/user-attachments/assets/9c5322ad-24b6-479a-9ea0-7dd5ed269730)
@@ -231,6 +231,7 @@ Tahap training membaca data sebanyak ``` batch_size=512 ``` dan melakukan perula
 
 ![Screenshot 2024-10-24 171702](https://github.com/user-attachments/assets/d1a7a991-8235-4715-af2b-81e5c70f4a28)
 
+## Evaluasi
 Proses training dilakukan sekalian dengan evaluasi testing, dengan diagram evaluasi nilai ``` roor_mean_squared_error ``` sebagai berikut
 
 ![Screenshot 2024-10-24 171831](https://github.com/user-attachments/assets/1591ceeb-fbcc-42e3-81da-4cbf9730e7ce)
@@ -240,3 +241,15 @@ Diagram loss dari proses training dan evaluasi adalah:
 ![Screenshot 2024-10-24 172245](https://github.com/user-attachments/assets/747a61df-4638-41c9-aadb-35265c8af403)
 
 Bahwa dari diagram di atas, bahwa nilai ``` RMSE ``` saat training ataupun testing tidak mengalami perubahan yang signifikan (nilai diantara 0,44 sampai 0,45), sedangkan nilai ``` loss ``` saat training dan testing mengalami perubahan naik dari 2,778 sampai 6,659.
+
+Cara merekomendasikan movie berdasarkan rating dan yang belum pernah ditonton, dengan operator ``` bitwise (~) ```.
+
+![Screenshot 2024-10-24 173110](https://github.com/user-attachments/assets/d149771d-20c9-438d-a37a-513ef2852b37)
+
+Proses memberikan rekomendasi movie dengan fungsi ``` model.predict() ``` berdasarkan data user, movie dalam bentuk array.
+
+![Screenshot 2024-10-24 174335](https://github.com/user-attachments/assets/566e83c5-0d2a-4b02-922e-31facbeb6ea4)
+
+Hasil 10 movie hasil rekomendasi:
+
+![image](https://github.com/user-attachments/assets/637456e0-346f-4155-a61d-847ffaced0b9)
