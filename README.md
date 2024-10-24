@@ -185,3 +185,11 @@ Hasil dari matriks ```todense()``` dijadikan dalam bentuk DataFrame, seperti ini
 
 ![movie15](https://github.com/user-attachments/assets/be1f6230-8727-4743-ae1f-15366f4a1535)
 
+Matrik DataFrame di atas ditampilkan sebanyak 10 movie dan 10 jenis genres (nilai korelasi antara movie dengan jenis genres). Selanjutnya melakukan perhitungan derajat kesamaan antar movie dengan fungsi cosine similarity dari library sklearn, dengan perintah dan hasil berikut:
+
+![Screenshot 2024-10-24 162444](https://github.com/user-attachments/assets/a147cdf6-25b5-4ad3-a89f-1f9fe124980e)
+
+Cosine similarity menghasilkan matriks kesamaan antar movie dalam bentuk array. Kemudian menampilkan nilai cosine similarity dari data movie (jumlah data berukuran 4736,4736), seperti berikut:
+
+![Screenshot 2024-10-24 162958](https://github.com/user-attachments/assets/c25a1586-7d6e-4551-b723-37533668f274)
+
