@@ -7,9 +7,9 @@ Dalam dataset movie terdapat informasi terkait rating dari movie yang dilihat pe
 ## Business Understanding
 Proyek ini menangani data dalam jumlah besar dan menyaring informasi yang berguna, merekomendasikan film serupa berdasarkan pilihan pengguna dan melakukan analisis pada ulasan film yang dipilih. Popularitas sebuah film didasarkan pada jenis ulasan yang didapatnya dari penonton. Ulasan-ulasan ini dapat mempengaruhi pilihan pengguna lain. Pengguna lebih cenderung memilih film yang direkomendasikan oleh kebanyakan orang. 
 ### Problem statements
-Berdasarkan uraian di atas, maka proyek ini membuat: bagaimana membuat sistem rekomendasi dengan teknik content-based filtering dan collaborative filtering?
+Berdasarkan uraian di atas, maka proyek ini membuat: bagaimana membuat sistem rekomendasi dengan teknik content based filtering dan collaborative filtering?
 ### Goals
-Untuk menjawab pertanyaan di problem statements, maka yang dilakukan adalah membuat model atau sistem rekomendasi dengan content-based filtering dan collaborative filtering.
+Untuk menjawab pertanyaan di problem statements, maka yang dilakukan adalah membuat model atau sistem rekomendasi dengan content based filtering dan collaborative filtering.
 ### Solution statements
 Untuk memberikan rekomendasi berdasarkan data movie yang ditonton pengguna dan rating.
 
@@ -193,7 +193,7 @@ Cosine similarity menghasilkan matriks kesamaan antar movie dalam bentuk array. 
 
 ![Screenshot 2024-10-24 162958](https://github.com/user-attachments/assets/c25a1586-7d6e-4551-b723-37533668f274)
 
-## Membuat Model
+## Model Content Based Filtering
 Model yang dibangun adalah sistem rekomendasi dengan pendekatan content based filtering. Model yang dibagun adalah sistem rekomendasi movie berdasarkan jenis genres yang ada dalam tabel ``` movies.csv ```. Selanjutnya dari data array cosine similarity di atas dapat digunakan sebagai proses rekomendasi movie yang mempunyai kesamaan. Proses rekomendasi berdasarkan movie yang pernah ditonton pengguna yang mempunyai kesamaan menggunakan ``` def movie_recommendations() ```. Proses rekomendasi berdasarkan parameter judul movie (title), nilai kesamaan (cosine similarity), items (fitur judul movie yang mempunyai kesamaan), dan k (banyaknya movie yang direkomendasikan). Perintah mencari rekomendasi movie yang mirip dengan 'Shark Lake (2015)' dan hasilnya seperti berikut:
 
 ![Screenshot 2024-10-24 163712](https://github.com/user-attachments/assets/b9c66733-0893-4961-8a15-c234a66653ef)
