@@ -6,9 +6,12 @@ Dalam dataset movie terdapat informasi terkait rating dari movie yang dilihat pe
 
 ## Business Understanding
 Proyek ini menangani data dalam jumlah besar dan menyaring informasi yang berguna, merekomendasikan film serupa berdasarkan pilihan pengguna dan melakukan analisis pada ulasan film yang dipilih. Popularitas sebuah film didasarkan pada jenis ulasan yang didapatnya dari penonton. Ulasan-ulasan ini dapat mempengaruhi pilihan pengguna lain. Pengguna lebih cenderung memilih film yang direkomendasikan oleh kebanyakan orang. 
-- Problem statements, berdasarkan uraian di atas, maka proyek ini membuat: bagaimana membuat sistem rekomendasi dengan teknik content-based filtering?
-- Goals, untuk menjawab pertanyaan di problem statements, maka dilakukan: membuat model atau sistem rekomendasi.
-- Solution statements, untuk memberikan rekomendasi berdasarkan data movie yang ditonton pengguna dan rating.
+### Problem statements
+Berdasarkan uraian di atas, maka proyek ini membuat: bagaimana membuat sistem rekomendasi dengan teknik content-based filtering dan collaborative filtering?
+### Goals
+Untuk menjawab pertanyaan di problem statements, maka yang dilakukan adalah membuat model atau sistem rekomendasi dengan content-based filtering dan collaborative filtering.
+### Solution statements
+Untuk memberikan rekomendasi berdasarkan data movie yang ditonton pengguna dan rating.
 
 ## Data Understanding
 Dataset ini diambil dari [kaggle](https://www.kaggle.com/datasets/parasharmanas/movie-recommendation-system). Dalam dataset terdapat dua tabel, yaitu movies.csv, dan ratings.csv
@@ -53,9 +56,15 @@ Mengecek data yang kosong adalah ``` isnull().sum() ```, dan data pada tabel ```
 
 ![rati2](https://github.com/user-attachments/assets/669fc21c-92f8-4b78-857e-c79a12749595)
 
-Mengecek data yang duplikat adalah ``` duplicated().sum() ```, dan hasilnya dikedua tabel ``` movies.csv ``` dan ``` ratings.csv ``` nilainya 0, ini hasilnya
+Mengecek data yang duplikat adalah ``` duplicated().sum() ```, dan hasilnya di tabel ``` movies.csv ``` kolom judul ``` title ``` movie terdapat yang duplikat, sehingga dilakukan pengecekan dengan perintah dan hasil:
 
-``` Data yang duplikat:  0 ```
+![Screenshot 2024-10-24 140857](https://github.com/user-attachments/assets/952779cb-2979-4264-a948-b777deaa406f)
+
+Kolom genres mempunyai isi yang bervariasi dengan satu judul ``` title ``` movie terdapat banyak genres yang dihubungkan dengan tanda baca ``` | ```, seperti berikut:
+
+![Screenshot 2024-10-24 141238](https://github.com/user-attachments/assets/aaf06c4b-dc9e-46b3-aeed-66f9e800d431)
+
+Dan hasil fungsi ``` duplicated().sum() ``` pada tabel ``` ratings.csv ```, ``` 0 ```.
 
 Mengecek data yang unik adalah ``` nunique() ```, dan hasilnya pada tabel ``` movies.csv ``` 
 
@@ -94,17 +103,9 @@ Hasil dari tabel ``` ratings.csv ```
 ![rati4](https://github.com/user-attachments/assets/79a94001-9a0d-4d8f-a184-ea448d9c3c23)
 
 ## Data Preparation
-Kolom judul ``` title ``` movie terdapat yang duplikat, sehingga dilakukan pengecekan dengan perintah dan hasil:
-
-![Screenshot 2024-10-24 140857](https://github.com/user-attachments/assets/952779cb-2979-4264-a948-b777deaa406f)
-
-Proses menghapus dengan fungsi dan hasil sebagai berikut: (jumlah baris berubah)
+Proses menghapus data yang duplikat dengan fungsi dan hasil sebagai berikut: (jumlah baris berubah)
 
 ![Screenshot 2024-10-24 141015](https://github.com/user-attachments/assets/81088c6c-2e47-43b1-858a-cd8ac65416b3)
-
-Kolom genres mempunyai isi yang bervariasi dengan satu judul ``` title ``` movie terdapat banyak genres yang dihubungkan dengan tanda baca ``` | ```, seperti berikut:
-
-![Screenshot 2024-10-24 141238](https://github.com/user-attachments/assets/aaf06c4b-dc9e-46b3-aeed-66f9e800d431)
 
 Menghasilkan: kolom ``` genres ``` pada tabel ``` movies.csv ``` terdapat lebih dari 1 jenis/kategori dengan dihubungkan tanda ``` | ```. Sehingga dilakukan proses satu judul movie hanya ada satu jenis genres dengan fungsi.
 
@@ -166,8 +167,7 @@ Bentuk dari data setelah di dictionary adalah:
 
 ``` (4736,3) ```
 
-## Membuat Model
-Model yang dibangun adalah sistem rekomendasi dengan pendekatan content based filtering. Model yang dibagun adalah sistem rekomendasi movie berdasarkan jenis genres yang ada dalam tabel ``` movies.csv ```. Fungsi TF-IDF Vectorizer digunakan pada sistem rekomendasi untuk menemukan representasi fitur penting dari setiap genres movie. Tahap ```tfidfvectorizer()```, menghasilkan:
+Fungsi TF-IDF Vectorizer digunakan pada sistem rekomendasi untuk menemukan representasi fitur penting dari setiap genres movie. Tahap ```tfidfvectorizer()```, menghasilkan:
 
 ![movie12](https://github.com/user-attachments/assets/39d85478-aa1c-4e73-9ccb-73121600f244)
 
@@ -193,7 +193,8 @@ Cosine similarity menghasilkan matriks kesamaan antar movie dalam bentuk array. 
 
 ![Screenshot 2024-10-24 162958](https://github.com/user-attachments/assets/c25a1586-7d6e-4551-b723-37533668f274)
 
-Selanjutnya dari data array cosine similarity di atas dapat digunakan sebagai proses rekomendasi movie yang mempunyai kesamaan. Proses rekomendasi berdasarkan movie yang pernah ditonton pengguna yang mempunyai kesamaan. Proses rekomendasi berdasarkan parameter judul movie (title), nilai kesamaan (cosine similarity), items (fitur judul movie yang mempunyai kesamaan), dan k (banyaknya movie yang direkomendasikan). Perintah mencari rekomendasi movie yang mirip dengan 'Shark Lake (2015)' seperti berikut:
+## Membuat Model
+Model yang dibangun adalah sistem rekomendasi dengan pendekatan content based filtering. Model yang dibagun adalah sistem rekomendasi movie berdasarkan jenis genres yang ada dalam tabel ``` movies.csv ```. Selanjutnya dari data array cosine similarity di atas dapat digunakan sebagai proses rekomendasi movie yang mempunyai kesamaan. Proses rekomendasi berdasarkan movie yang pernah ditonton pengguna yang mempunyai kesamaan menggunakan ``` def movie_recommendations() ```. Proses rekomendasi berdasarkan parameter judul movie (title), nilai kesamaan (cosine similarity), items (fitur judul movie yang mempunyai kesamaan), dan k (banyaknya movie yang direkomendasikan). Perintah mencari rekomendasi movie yang mirip dengan 'Shark Lake (2015)' dan hasilnya seperti berikut:
 
 ![Screenshot 2024-10-24 163712](https://github.com/user-attachments/assets/b9c66733-0893-4961-8a15-c234a66653ef)
 
@@ -201,7 +202,7 @@ Selanjutnya dari data array cosine similarity di atas dapat digunakan sebagai pr
 
 Berdasarkan hasil rekomendasi di atas, proyek ini akan menampilkan movie yang mempunyai genres yang mirip dengan movie yang dicari ``` 'Shark Lake (2015)' ```.
 
-## Model Collaborative Filtering
+## Data Preparation
 Model ini memberikan rekomendasi berdasarkan nilai rating yang dimasukan pengguna. Berdasarkan nilai rating tersebut akan diolah untuk digunakan rekomendasi movie yang mirip serta belum pernah ditonton.
 - Tahap pertama: melakukan encode userId dan movieId ke bentuk angka (integer).
   
@@ -219,6 +220,7 @@ Hasil dari tahapan di atas kemudian digunakan sebagai data training dan testing,
 
 ![Screenshot 2024-10-24 170905](https://github.com/user-attachments/assets/ea62e0e6-a0b4-408f-9933-2da092ed62d1)
 
+## Model Collaborative Filtering
 Proses training menggunakan ``` class RecommenderNet(Model) ```, dengan library ``` import tensorflow ``` dan ``` from tensorflow import keras ```. Model ini akan melakukan teknik embeding dengan menghitung nilai kecocokan antara user dan movie.
 
 ![Screenshot 2024-10-24 171241](https://github.com/user-attachments/assets/dae7e626-e2a7-4830-a062-9e7bded0b92d)
