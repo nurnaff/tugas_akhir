@@ -51,10 +51,20 @@ Hasilnya:
 ![rati1](https://github.com/user-attachments/assets/daefebd8-513f-4447-9c7c-fdb68322525d)
 
 Mengecek data yang kosong adalah ``` isnull().sum() ```, dan data pada tabel ``` movies.csv ``` dan ``` ratings.csv ``` tidak ada yang kosong, ini hasilnya
+|             | 0             |
+|-------------|---------------|
+| movieId     | 0             |
+| title       | 0             |
+| genres      | 0             |
+``` dtype:int64 ```
 
-![movie2](https://github.com/user-attachments/assets/111a56d6-6d01-43c1-bf65-9820a3d2d68a)
-
-![rati2](https://github.com/user-attachments/assets/669fc21c-92f8-4b78-857e-c79a12749595)
+|             | 0             |
+|-------------|---------------|
+| userId      | 0             |
+| movieId     | 0             |
+| rating      | 0             |
+| timestamp   | 0             |
+``` dtype:int64 ```
 
 Mengecek data yang duplikat adalah ``` duplicated().sum() ```, dan hasilnya di tabel ``` movies.csv ``` kolom judul ``` title ``` movie terdapat yang duplikat, sehingga dilakukan pengecekan dengan perintah dan hasil:
 
