@@ -51,14 +51,14 @@ Hasilnya:
 ![rati1](https://github.com/user-attachments/assets/daefebd8-513f-4447-9c7c-fdb68322525d)
 
 Mengecek data yang kosong adalah ``` isnull().sum() ```, dan data pada tabel ``` movies.csv ``` dan ``` ratings.csv ``` tidak ada yang kosong, ini hasilnya
-|             | 0             |
+| movies.csv  | 0             |
 |-------------|---------------|
 | movieId     | 0             |
 | title       | 0             |
 | genres      | 0             |
 ``` dtype:int64 ```
 
-|             | 0             |
+| ratings.csv | 0             |
 |-------------|---------------|
 | userId      | 0             |
 | movieId     | 0             |
@@ -77,12 +77,21 @@ Kolom genres mempunyai isi yang bervariasi dengan satu judul ``` title ``` movie
 Dan hasil fungsi ``` duplicated().sum() ``` pada tabel ``` ratings.csv ```, ``` 0 ```.
 
 Mengecek data yang unik adalah ``` nunique() ```, dan hasilnya pada tabel ``` movies.csv ``` 
-
-![movie3](https://github.com/user-attachments/assets/2357ae47-81b2-45c6-a1ea-7b392bad0f13)
+| movies.csv  | 0             |
+|-------------|---------------|
+| movieId     | 62423         |
+| title       | 62325         |
+| genres      | 1639          |
+``` dtype:int64 ```
 
 Dan hasilnya fungsi ``` nunique() ``` pada tabel ``` ratings.csv ```
-
-![rati3](https://github.com/user-attachments/assets/719ef532-20e1-42da-96c1-73febbf60892)
+| ratings.csv | 0             |
+|-------------|---------------|
+| userId      | 162541        |
+| movieId     | 59047         |
+| rating      | 10            |
+| timestamp   | 20115267      |
+``` dtype:int64 ```
 
 Mengecek nilai statistik dari tabel ``` movies.csv ``` dan ``` ratings.csv ``` dengan fungsi: ``` describe() ```.
 
@@ -98,11 +107,28 @@ Mengecek nilai statistik dari tabel ``` movies.csv ``` dan ``` ratings.csv ``` d
 
 ``` max ``` menampilkan nilai maksimum dari setiap kolom angka.
 
-Hasil dari fungsi ``` describe() ``` adalah:
+Hasil dari fungsi ``` describe() ``` adalah: ``` dt.describe() ```. Hasil tabel ``` movies.csv ```:
+| movies.csv  | movieId      |
+|-------------|--------------|
+| count       | 62423        |
+| mean        | 122220.388   |
+| std         | 63264.745    |
+| min         | 1            |
+| 25%         | 82146.5      |
+| 50%         | 138022       |
+| 75%         | 173222       |
+| max         | 209171       |
 
-![WhatsApp Image 2024-10-24 at 14 01 13](https://github.com/user-attachments/assets/93b78f5f-db10-4d78-9da6-4cfed36d0129)
-
-![WhatsApp Image 2024-10-24 at 14 01 28](https://github.com/user-attachments/assets/f5799875-f097-41da-b9c1-a14274556efd)
+| ratings.csv  | userId       | movieId   | rating    | timestamp   |
+|--------------|--------------|-----------|-----------|-------------|
+| count        | 25000100     | 25000100  | 25000100  | 25000100    |
+| mean         | 81189.28     | 21387.98  | 3.534     | 1215601000  |
+| std          | 46791.72     | 39198.86  | 1.061     | 226875800   |
+| min          | 1            | 1         | 0.5       | 789652000   |
+| 25%          | 40510        | 1196      | 3         | 1011747000  |
+| 50%          | 80914        | 2947      | 3.5       | 1198868000  |
+| 75%          | 121557       | 8623      | 4         | 1447205000  |
+| max          | 162541       | 209171    | 5         | 1574328000  |
 
 Mengecek bentuk baris dan kolom dari tabel ``` movies.csv ```, fungsinya: ``` shape ```. Hasil dari tabel ```movies.csv```
 
@@ -113,6 +139,7 @@ Hasil dari tabel ``` ratings.csv ```
 ![rati4](https://github.com/user-attachments/assets/79a94001-9a0d-4d8f-a184-ea448d9c3c23)
 
 ## Data Preparation
+### Data Preparation untuk Content Based Filtering
 Proses menghapus data yang duplikat dengan fungsi dan hasil sebagai berikut: (jumlah baris berubah)
 
 ![Screenshot 2024-10-24 141015](https://github.com/user-attachments/assets/81088c6c-2e47-43b1-858a-cd8ac65416b3)
@@ -195,24 +222,7 @@ Hasil dari matriks ```todense()``` dijadikan dalam bentuk DataFrame, seperti ini
 
 ![movie15](https://github.com/user-attachments/assets/be1f6230-8727-4743-ae1f-15366f4a1535)
 
-Matrik DataFrame di atas ditampilkan sebanyak 10 movie dan 10 jenis genres (nilai korelasi antara movie dengan jenis genres). Selanjutnya melakukan perhitungan derajat kesamaan antar movie dengan fungsi cosine similarity dari library sklearn, dengan perintah dan hasil berikut:
-
-![Screenshot 2024-10-24 162444](https://github.com/user-attachments/assets/a147cdf6-25b5-4ad3-a89f-1f9fe124980e)
-
-Cosine similarity menghasilkan matriks kesamaan antar movie dalam bentuk array. Kemudian menampilkan nilai cosine similarity dari data movie (jumlah data berukuran 4736,4736), seperti berikut:
-
-![Screenshot 2024-10-24 162958](https://github.com/user-attachments/assets/c25a1586-7d6e-4551-b723-37533668f274)
-
-## Model Content Based Filtering
-Model yang dibangun adalah sistem rekomendasi dengan pendekatan content based filtering. Model yang dibagun adalah sistem rekomendasi movie berdasarkan jenis genres yang ada dalam tabel ``` movies.csv ```. Selanjutnya dari data array cosine similarity di atas dapat digunakan sebagai proses rekomendasi movie yang mempunyai kesamaan. Proses rekomendasi berdasarkan movie yang pernah ditonton pengguna yang mempunyai kesamaan menggunakan ``` def movie_recommendations() ```. Proses rekomendasi berdasarkan parameter judul movie (title), nilai kesamaan (cosine similarity), items (fitur judul movie yang mempunyai kesamaan), dan k (banyaknya movie yang direkomendasikan). Perintah mencari rekomendasi movie yang mirip dengan 'Shark Lake (2015)' dan hasilnya seperti berikut:
-
-![Screenshot 2024-10-24 163712](https://github.com/user-attachments/assets/b9c66733-0893-4961-8a15-c234a66653ef)
-
-![Screenshot 2024-10-24 163824](https://github.com/user-attachments/assets/59046d6d-b4bd-45b8-8d91-12d40ac9d8fa)
-
-Berdasarkan hasil rekomendasi di atas, proyek ini akan menampilkan movie yang mempunyai genres yang mirip dengan movie yang dicari ``` 'Shark Lake (2015)' ```.
-
-## Data Preparation
+### Data Preparation untuk Collaborative Filtering
 Model ini memberikan rekomendasi berdasarkan nilai rating yang dimasukan pengguna. Berdasarkan nilai rating tersebut akan diolah untuk digunakan rekomendasi movie yang mirip serta belum pernah ditonton.
 - Tahap pertama: melakukan encode userId dan movieId ke bentuk angka (integer).
   
@@ -230,7 +240,25 @@ Hasil dari tahapan di atas kemudian digunakan sebagai data training dan testing,
 
 ![Screenshot 2024-10-24 170905](https://github.com/user-attachments/assets/ea62e0e6-a0b4-408f-9933-2da092ed62d1)
 
-## Model Collaborative Filtering
+## Membuat Model
+### Model Content Based Filtering
+Matrik DataFrame di atas ditampilkan sebanyak 10 movie dan 10 jenis genres (nilai korelasi antara movie dengan jenis genres). Selanjutnya melakukan perhitungan derajat kesamaan antar movie dengan fungsi cosine similarity dari library sklearn, dengan perintah dan hasil berikut:
+
+![Screenshot 2024-10-24 162444](https://github.com/user-attachments/assets/a147cdf6-25b5-4ad3-a89f-1f9fe124980e)
+
+Cosine similarity menghasilkan matriks kesamaan antar movie dalam bentuk array. Kemudian menampilkan nilai cosine similarity dari data movie (jumlah data berukuran 4736,4736), seperti berikut:
+
+![Screenshot 2024-10-24 162958](https://github.com/user-attachments/assets/c25a1586-7d6e-4551-b723-37533668f274)
+
+Model yang dibangun adalah sistem rekomendasi dengan pendekatan content based filtering. Model yang dibagun adalah sistem rekomendasi movie berdasarkan jenis genres yang ada dalam tabel ``` movies.csv ```. Selanjutnya dari data array cosine similarity di atas dapat digunakan sebagai proses rekomendasi movie yang mempunyai kesamaan. Proses rekomendasi berdasarkan movie yang pernah ditonton pengguna yang mempunyai kesamaan menggunakan ``` def movie_recommendations() ```. Proses rekomendasi berdasarkan parameter judul movie (title), nilai kesamaan (cosine similarity), items (fitur judul movie yang mempunyai kesamaan), dan k (banyaknya movie yang direkomendasikan). Perintah mencari rekomendasi movie yang mirip dengan 'Shark Lake (2015)' dan hasilnya seperti berikut:
+
+![Screenshot 2024-10-24 163712](https://github.com/user-attachments/assets/b9c66733-0893-4961-8a15-c234a66653ef)
+
+![Screenshot 2024-10-24 163824](https://github.com/user-attachments/assets/59046d6d-b4bd-45b8-8d91-12d40ac9d8fa)
+
+Berdasarkan hasil rekomendasi di atas, proyek ini akan menampilkan movie yang mempunyai genres yang mirip dengan movie yang dicari ``` 'Shark Lake (2015)' ```.
+
+### Model Collaborative Filtering
 Proses training menggunakan ``` class RecommenderNet(Model) ```, dengan library ``` import tensorflow ``` dan ``` from tensorflow import keras ```. Model ini akan melakukan teknik embeding dengan menghitung nilai kecocokan antara user dan movie.
 
 ![Screenshot 2024-10-24 171241](https://github.com/user-attachments/assets/dae7e626-e2a7-4830-a062-9e7bded0b92d)
@@ -262,6 +290,7 @@ Proses memberikan rekomendasi movie dengan fungsi ``` model.predict() ``` berdas
 
 ![Screenshot 2024-10-24 174335](https://github.com/user-attachments/assets/566e83c5-0d2a-4b02-922e-31facbeb6ea4)
 
+## Hasil Rekomendasi Collaborative Filtering
 Hasil 10 movie hasil rekomendasi:
 
 ![image](https://github.com/user-attachments/assets/637456e0-346f-4155-a61d-847ffaced0b9)
