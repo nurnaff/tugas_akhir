@@ -300,11 +300,11 @@ Tahap training membaca data sebanyak ``` batch_size=512 ``` dan melakukan perula
 
 Proses training dilakukan sekalian dengan evaluasi testing, dengan diagram evaluasi nilai ``` roor_mean_squared_error ``` sebagai berikut
 
-![Screenshot 2024-10-24 171831](https://github.com/user-attachments/assets/1591ceeb-fbcc-42e3-81da-4cbf9730e7ce)
+![image](https://github.com/user-attachments/assets/3bcbdd55-6fa8-4ea2-b872-3c752353bf29)
 
-Diagram loss dari proses training dan evaluasi adalah:
+Diagram loss function dari proses training dan evaluasi adalah:
 
-![Screenshot 2024-10-24 172245](https://github.com/user-attachments/assets/747a61df-4638-41c9-aadb-35265c8af403)
+![image](https://github.com/user-attachments/assets/0182426b-d252-4e02-b985-e4d6b40a9caf)
 
 Cara merekomendasikan movie berdasarkan rating dan yang belum pernah ditonton, dengan operator ``` bitwise (~) ```.
 
@@ -323,16 +323,16 @@ Top 10 movie recommendation
 ```
 | title  | genres         |
 |-----|--------------|
-| Babe (1995)   | Children         |
-| Secret of Roan Inish, The (1994)   | Children         |
+| Seven (a.k.a. Se7en) (1995)   | Mystery         |
+| Fugitive, The (1993)   | Thriller         |
 | Rear Window (1954)   | Mystery        |
 | Maltese Falcon, The (1941)   | FilmNoir         |
-| Notorius (1946)   | FilmNoir          |
-| Out of the Past (1947)   | FilmNoir         |
-| Pale Rider (1985)   | Western         |
-| Christmas Story, A (1983)   | Children         |
-| Maltese Falcon, The (a.k.a. Dengerous Female) (1931)   | Mystery         |
-| 10 Cloverfield Lane (2016)  | Thriller         |
+| Perfect Murder, A (1998)   | Thriller          |
+| Against All Odds (1984)   | Romance         |
+| Odessa File, The (1974)   | Thriller         |
+| Memento (2000)   | Mystery         |
+| Millions (2004)   | Children         |
+| True Grit (2010)  | Western         |
 
 ## Evaluasi
 Bahwa dari diagram grafik loss function dan RMSE saat training dan testing, bahwa nilai ``` RMSE ``` saat training ataupun testing tidak mengalami perubahan yang signifikan (nilai diantara 0,44 sampai 0,45), sedangkan nilai ``` loss ``` saat training dan testing mengalami perubahan naik dari 2,778 sampai 6,659.
@@ -341,4 +341,18 @@ Cara evaluasi rekomendasi dalam Content-Based Filtering (CBF) dengan menghitung 
 
 ![precis](https://github.com/user-attachments/assets/032615d8-7149-4244-b8b1-36f248b59a71)
 
-Berdasarakan permasalah yang dibangun dalam proyek ini: bagaimana membuat sistem rekomendasi dengan teknik content based filtering dan collaborative filtering? Maka proses membuat model rekomendasi menggunakan content based filtering berhasil dibangun dengan tingkat precision xxx, sedangkan model collaborative filtering menunjukkan mempunyai nilai error (RMSE) yang kecil.
+Misalkan contoh hasil rekomendasi dari model content based filtering seperti berikut (10 rekomendasi):
+| title  | genres         |
+|-----|--------------|
+| Retreat (2011)	   | Thriller         |
+| Gemini (2017)   | Thriller         |
+| Stash House (2012)	   | Thriller        |
+| Traders (2016)	   | Thriller         |
+| Rebirth (2016)	   | Thriller          |
+| Parallax View, The (1974)	   | Thriller         |
+| Arsenal (2017)   | Thriller         |
+| Deep in the Wood (2015)   | Thriller         |
+| Le Mataf (1973)   | Thriller         |
+| The Dead Season (1968)  | Thriller         |
+
+Misalkan hasil pencarian ``` 'Shark Lake (2015)' ``` memberikan rekomendasi genres ``` Thriller ```. Maka hasil dari rekomendasi content based filtering mempunyai precision =10/10, 1 artinya 100% relevan. Berdasarakan permasalahan yang dibangun dalam proyek ini: bagaimana membuat sistem rekomendasi dengan teknik content based filtering dan collaborative filtering? Maka proses membuat model rekomendasi menggunakan content based filtering berhasil dibangun dengan tingkat precision 1, sedangkan model collaborative filtering menunjukkan mempunyai nilai error (RMSE) yang kecil.
