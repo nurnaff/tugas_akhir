@@ -306,14 +306,6 @@ history = model.fit(
 
 ![image](https://github.com/user-attachments/assets/ad6af00c-8254-4cd1-bed6-98f37dc17864)
 
-Proses training dilakukan sekalian dengan evaluasi testing, dengan diagram evaluasi nilai ``` roor_mean_squared_error ``` sebagai berikut
-
-![image](https://github.com/user-attachments/assets/3bcbdd55-6fa8-4ea2-b872-3c752353bf29)
-
-Diagram loss function dari proses training dan evaluasi adalah:
-
-![image](https://github.com/user-attachments/assets/0182426b-d252-4e02-b985-e4d6b40a9caf)
-
 Cara merekomendasikan movie berdasarkan rating dan yang belum pernah ditonton, dengan operator ``` bitwise (~) ```.
 
 ![Screenshot 2024-10-24 173110](https://github.com/user-attachments/assets/d149771d-20c9-438d-a37a-513ef2852b37)
@@ -343,9 +335,19 @@ Top 10 movie recommendation
 | True Grit (2010)  | Western         |
 
 ## Evaluasi
+### Evaluasi Collaborative Filtering
+Proses training dilakukan sekalian dengan evaluasi testing, dengan diagram evaluasi nilai ``` roor_mean_squared_error ``` sebagai berikut
+
+![image](https://github.com/user-attachments/assets/3bcbdd55-6fa8-4ea2-b872-3c752353bf29)
+
+Diagram loss function dari proses training dan evaluasi adalah:
+
+![image](https://github.com/user-attachments/assets/0182426b-d252-4e02-b985-e4d6b40a9caf)
+
 Bahwa dari diagram grafik loss function dan RMSE saat training dan testing, bahwa nilai ``` RMSE ``` saat training ataupun testing tidak mengalami perubahan yang signifikan (nilai diantara 0,44 sampai 0,45), sedangkan nilai ``` loss ``` saat training dan testing mengalami perubahan naik dari 2,778 sampai 6,659.
 
-Cara evaluasi rekomendasi dalam Content-Based Filtering (CBF) dengan menghitung Precision. Precision adalah metrik yang menunjukkan seberapa relevan rekomendasi yang diberikan kepada pengguna dibandingkan dengan jumlah rekomendasi yang diberikan. Rumus-rumus berikut dapat digunakan untuk menghitung precision:
+### Evaluasi Content Based Filtering
+Cara evaluasi rekomendasi dalam Content Based Filtering (CBF) dengan menghitung Precision. Precision adalah metrik yang menunjukkan seberapa relevan rekomendasi yang diberikan kepada pengguna dibandingkan dengan jumlah rekomendasi yang diberikan. Rumus-rumus berikut dapat digunakan untuk menghitung precision:
 
 ![precis](https://github.com/user-attachments/assets/032615d8-7149-4244-b8b1-36f248b59a71)
 
@@ -363,4 +365,6 @@ Misalkan contoh hasil rekomendasi dari model content based filtering seperti ber
 | Le Mataf (1973)   | Thriller         |
 | The Dead Season (1968)  | Thriller         |
 
-Misalkan hasil pencarian ``` 'Shark Lake (2015)' ``` memberikan rekomendasi genres ``` Thriller ```. Maka hasil dari rekomendasi content based filtering mempunyai precision =10/10, 1 artinya 100% relevan. Berdasarakan permasalahan yang dibangun dalam proyek ini: bagaimana membuat sistem rekomendasi dengan teknik content based filtering dan collaborative filtering? Maka proses membuat model rekomendasi menggunakan content based filtering berhasil dibangun dengan tingkat precision 1, sedangkan model collaborative filtering menunjukkan mempunyai nilai error (RMSE) yang kecil.
+Misalkan hasil pencarian ``` 'Shark Lake (2015)' ``` memberikan rekomendasi genres ``` Thriller ```. Maka hasil dari rekomendasi content based filtering mempunyai precision =10/10, 1 artinya 100% relevan. 
+### Kesimpulan
+Berdasarkan permasalahan yang dibangun dalam proyek ini: bagaimana membuat sistem rekomendasi dengan teknik content based filtering dan collaborative filtering? Maka proses membuat model rekomendasi menggunakan content based filtering berhasil dibangun dengan tingkat precision 1, sedangkan model collaborative filtering menunjukkan mempunyai nilai error (RMSE) yang kecil.
