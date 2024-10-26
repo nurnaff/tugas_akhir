@@ -286,7 +286,7 @@ Perintah mencari rekomendasi movie yang mirip dengan 'Shark Lake (2015)' dan has
 Berdasarkan hasil rekomendasi di atas, proyek ini akan menampilkan movie yang mempunyai genres yang mirip dengan movie yang dicari ``` 'Shark Lake (2015)' ``` sebanyak k=5.
 
 ### Model Collaborative Filtering
-Proses training menggunakan ``` class RecommenderNet(Model) ```, dengan library ``` import tensorflow ``` dan ``` from tensorflow import keras ```. Model ini akan melakukan teknik embeding dengan menghitung nilai kecocokan antara user dan movie.
+Metode Collaborative Filter akan memberikan rekomendasi berdasarkan data user dan item (movie dalam kasus proyek ini). Proses rekomendasi berdasarkan jumlah user, jumlah movie, dan matriks fitur berupa ukuran embeding. Dalam model Collaborative Filtering parameter embedding sering digunakan berupa representasi pengguna dan item. Dimensi vektor embedding yang akan digunakan untuk pengguna dan movie ditentukan oleh embedding_size. Semakin besar embedding_size menunjukkan seberapa kompleks representasi yang dapat dipelajari. Proses training menggunakan ``` class RecommenderNet(Model) ```, dengan library ``` import tensorflow ``` dan ``` from tensorflow import keras ```. Model ini akan melakukan teknik embeding dengan menghitung nilai kecocokan antara user dan movie.
 
 ![Screenshot 2024-10-24 171241](https://github.com/user-attachments/assets/dae7e626-e2a7-4830-a062-9e7bded0b92d)
 
@@ -314,10 +314,25 @@ Proses memberikan rekomendasi movie dengan fungsi ``` model.predict() ``` berdas
 
 ![Screenshot 2024-10-24 174335](https://github.com/user-attachments/assets/566e83c5-0d2a-4b02-922e-31facbeb6ea4)
 
+![cara](https://github.com/user-attachments/assets/6a8851a4-139f-4364-baf4-7b8c7fc2eca4)
+
 ### Hasil Rekomendasi Collaborative Filtering
 Hasil 10 movie hasil rekomendasi:
-
-![image](https://github.com/user-attachments/assets/637456e0-346f-4155-a61d-847ffaced0b9)
+```
+Top 10 movie recommendation
+```
+| title  | genres         |
+|-----|--------------|
+| Babe (1995)   | Children         |
+| Secret of Roan Inish, The (1994)   | Children         |
+| Rear Window (1954)   | Mystery        |
+| Maltese Falcon, The (1941)   | FilmNoir         |
+| Notorius (1946)   | FilmNoir          |
+| Out of the Past (1947)   | FilmNoir         |
+| Pale Rider (1985)   | Western         |
+| Christmas Story, A (1983)   | Children         |
+| Maltese Falcon, The (a.k.a. Dengerous Female) (1931)   | Mystery         |
+| 10 Cloverfield Lane (2016)  | Thriller         |
 
 ## Evaluasi
 Bahwa dari diagram grafik loss function dan RMSE saat training dan testing, bahwa nilai ``` RMSE ``` saat training ataupun testing tidak mengalami perubahan yang signifikan (nilai diantara 0,44 sampai 0,45), sedangkan nilai ``` loss ``` saat training dan testing mengalami perubahan naik dari 2,778 sampai 6,659.
