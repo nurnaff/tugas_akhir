@@ -341,3 +341,4 @@ Cara evaluasi rekomendasi dalam Content-Based Filtering (CBF) dengan menghitung 
 
 ![precis](https://github.com/user-attachments/assets/032615d8-7149-4244-b8b1-36f248b59a71)
 
+Berdasarakan permasalah yang dibangun dalam proyek ini: bagaimana membuat sistem rekomendasi dengan teknik content based filtering dan collaborative filtering? Maka proses membuat model rekomendasi menggunakan content based filtering berhasil dibangun dengan tingkat precision xxx, sedangkan model collaborative filtering menunjukkan mempunyai nilai error (RMSE) yang kecil.
