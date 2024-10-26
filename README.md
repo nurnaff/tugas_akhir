@@ -336,3 +336,8 @@ Top 10 movie recommendation
 
 ## Evaluasi
 Bahwa dari diagram grafik loss function dan RMSE saat training dan testing, bahwa nilai ``` RMSE ``` saat training ataupun testing tidak mengalami perubahan yang signifikan (nilai diantara 0,44 sampai 0,45), sedangkan nilai ``` loss ``` saat training dan testing mengalami perubahan naik dari 2,778 sampai 6,659.
+
+Cara evaluasi rekomendasi dalam Content-Based Filtering (CBF) dengan menghitung Precision. Precision adalah metrik yang menunjukkan seberapa relevan rekomendasi yang diberikan kepada pengguna dibandingkan dengan jumlah rekomendasi yang diberikan. Rumus-rumus berikut dapat digunakan untuk menghitung precision:
+
+![precis](https://github.com/user-attachments/assets/032615d8-7149-4244-b8b1-36f248b59a71)
+
