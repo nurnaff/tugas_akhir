@@ -252,7 +252,17 @@ Matrik DataFrame fitur (TF-IDF) berukuran 10 movie dan 10 jenis genres (nilai ko
 
 ![Screenshot 2024-10-24 162444](https://github.com/user-attachments/assets/a147cdf6-25b5-4ad3-a89f-1f9fe124980e)
 
-Cosine similarity menghasilkan matriks kesamaan antar movie dalam bentuk array. Kemudian menampilkan nilai cosine similarity dari data movie (jumlah data berukuran 4736,4736), seperti berikut:
+Cosine similarity adalah menghitung cosinus sudut dari dua vektor atau array multidimensi, dengan persamaan:
+
+![cosin1](https://github.com/user-attachments/assets/949425be-2b4e-4dee-8c7f-aac0dd72661e)
+
+``` A.B ``` merupakan hasil kali vektor A dan B. ``` ||A|| ``` merupakan panjang dari vektor A, dengan persamaan:
+
+![vekA](https://github.com/user-attachments/assets/bbfa9b1d-d671-4f37-bedd-2a60aa7dfada)
+
+Contoh: A=[2,1,2], B=[4,2,4], cosine similarity dari (A,B) adalah ``` A.B ``` =(2.4)+(1.2)+(2.4)=8+2+8=18. ``` ||A|| ``` =![panj_A](https://github.com/user-attachments/assets/42baa91f-eab9-4da5-80d5-58eba98c4ae5) ``` ||B|| ```= ![vekB](https://github.com/user-attachments/assets/599853d5-9f00-459a-8894-c7b891bf7eb7) Hasil akhir adalah ![akhir](https://github.com/user-attachments/assets/7bdaaa9f-cc18-4b6f-9efd-0128dd0455b2)
+
+Nilai cosine similarity antara -1 sampai 1, dengan penjelasan, 1: adalah vektor identik, -1: vektor berlawanan arah, dan 0: vektor tidak ada kesamaan. Cosine similarity menghasilkan matriks kesamaan antar movie dalam bentuk array. Kemudian menampilkan nilai cosine similarity dari data movie (jumlah data berukuran 4736,4736), seperti berikut:
 
 ![Screenshot 2024-10-24 162958](https://github.com/user-attachments/assets/c25a1586-7d6e-4551-b723-37533668f274)
 
