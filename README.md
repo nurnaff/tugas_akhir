@@ -13,7 +13,7 @@ Untuk menjawab pertanyaan di problem statements, maka yang dilakukan adalah memb
 Untuk memberikan rekomendasi berdasarkan data movie yang ditonton pengguna dan rating.
 
 ## Data Understanding
-Dataset ini diambil dari [kaggle](https://www.kaggle.com/datasets/parasharmanas/movie-recommendation-system). Dalam dataset terdapat dua tabel, yaitu movies.csv, dan ratings.csv
+Tahap ini merupakan tahap analisis dan memahami data, mulai dari mengambil data (mengumpulkan data), memeriksa data (terkait ada yang kosong, atau duplikat), menganalisis deskriptif (misalkan mengecek nilai rata-rata, median dari data). Dataset ini diambil dari [kaggle](https://www.kaggle.com/datasets/parasharmanas/movie-recommendation-system). Dalam dataset terdapat dua tabel, yaitu movies.csv, dan ratings.csv
 
 Tabel ``` movies.csv ```, terdapat 62423 baris, dan 3 kolom. Terdiri dari:
 
