@@ -242,7 +242,7 @@ Model ini memberikan rekomendasi berdasarkan nilai rating yang dimasukan penggun
 
   ![Screenshot 2024-10-24 170325](https://github.com/user-attachments/assets/7753cfde-e664-4576-b3ff-14a6986f6656)
 
-#### - Tahap ketiga: menghitung jumlah user, movie, dan mengubah nilai rating dari String ke float
+#### - Tahap ketiga: menghitung jumlah user, movie, dan mengubah nilai rating dari String ke float (Ekstraksi Fitur)
 
   ![Screenshot 2024-10-24 170532](https://github.com/user-attachments/assets/64b62959-3faa-4154-825c-d6221a4dcd24)
 
