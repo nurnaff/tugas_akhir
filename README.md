@@ -139,16 +139,19 @@ Hasil dari tabel ``` ratings.csv ```
 
 ## Data Preparation
 ### Data Preparation untuk Content Based Filtering
+#### - Menghapus Duplikasi
 Proses menghapus data yang duplikat dengan fungsi dan hasil sebagai berikut: (jumlah baris berubah)
 
 ![Screenshot 2024-10-24 141015](https://github.com/user-attachments/assets/81088c6c-2e47-43b1-858a-cd8ac65416b3)
 
+#### - Menghapus nilai yang ambigu
 Menghasilkan: kolom ``` genres ``` pada tabel ``` movies.csv ``` terdapat lebih dari 1 jenis/kategori dengan dihubungkan tanda ``` | ```. Sehingga dilakukan proses satu judul movie hanya ada satu jenis genres dengan fungsi.
 
 ``` dt_br['genres']=dt_br['genres'].str.split('|').str[0] ```. Hasilnya
 
 ![Screenshot 2024-10-24 141301](https://github.com/user-attachments/assets/4c04fcdd-e83f-4ee9-918b-9e904b436a0d)
 
+#### - Menghapus baris yang tidak mempunyai makna
 Karena data pada genres terdapat isi 'no genres listed' sehingga dilakukan penghapusan, dengan fungsi:
 
 ``` dt_br.drop(dt_br[dt_br['genres']=='(no genres listed)'].index,inplace=True) ```. Hasilnya
@@ -175,6 +178,7 @@ print(hasil)
 
 ![jumlahmovie](https://github.com/user-attachments/assets/f60e3566-3bee-4209-9316-f78b1e65419e)
 
+#### - Menghapus baris yang tidak digunakan
 Menghapus baris yang jumlah 1 dan lebih dari 2000 adalah ```imax``` dengan jumlah hanya 1, dengan fungsi 
 
 ```dt_br=dt_br[~dt_br['genres'].str.contains('IMAX')]```
@@ -209,6 +213,7 @@ Bentuk dari data setelah di dictionary adalah:
 
 ``` (4736,3) ```
 
+#### - Ekstraksi Fitur (Mengubah nilai item ke bentuk fitur yang dapat dianalisis) dengan TF-IDF
 Fungsi TF-IDF Vectorizer digunakan pada sistem rekomendasi untuk menemukan representasi fitur penting dari setiap genres movie. Tahap ```tfidfvectorizer()```, menghasilkan:
 
 ![movie12](https://github.com/user-attachments/assets/39d85478-aa1c-4e73-9ccb-73121600f244)
@@ -229,18 +234,19 @@ Hasil dari matriks ```todense()``` dijadikan dalam bentuk DataFrame, seperti ini
 
 ### Data Preparation untuk Collaborative Filtering
 Model ini memberikan rekomendasi berdasarkan nilai rating yang dimasukan pengguna. Berdasarkan nilai rating tersebut akan diolah untuk digunakan rekomendasi movie yang mirip serta belum pernah ditonton.
-- Tahap pertama: melakukan encode userId dan movieId ke bentuk angka (integer).
+#### - Tahap pertama: melakukan encode userId dan movieId ke bentuk angka (integer).
   
   ![Screenshot 2024-10-24 170309](https://github.com/user-attachments/assets/9c5322ad-24b6-479a-9ea0-7dd5ed269730)
 
-- Tahap kedua: hasil encode data userId dan movieId (berupa angka) dimasukkan ke dalam DataFrame.
+#### - Tahap kedua: hasil encode data userId dan movieId (berupa angka) dimasukkan ke dalam DataFrame.
 
   ![Screenshot 2024-10-24 170325](https://github.com/user-attachments/assets/7753cfde-e664-4576-b3ff-14a6986f6656)
 
-- Tahap ketiga: menghitung jumlah user, movie, dan mengubah nilai rating dari String ke float
+#### - Tahap ketiga: menghitung jumlah user, movie, dan mengubah nilai rating dari String ke float
 
   ![Screenshot 2024-10-24 170532](https://github.com/user-attachments/assets/64b62959-3faa-4154-825c-d6221a4dcd24)
 
+#### - Pembagian Data Training dan Testing (Split)
 Hasil dari tahapan di atas kemudian digunakan sebagai data training dan testing, dengan pembagian data training 80% dari total data dan testing 20% dari seluruh data. Variabel input ``` (x) ``` adalah ``` user, movie ```, dan output atau target ``` (y) ``` adalah ``` rating ```.
 
 ![Screenshot 2024-10-24 170905](https://github.com/user-attachments/assets/ea62e0e6-a0b4-408f-9933-2da092ed62d1)
