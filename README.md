@@ -167,8 +167,14 @@ Menampilkan grafik jumlah dari setiap jenis ``` genres ```. Fungsinya: ``` dt_br
 ![Screenshot 2024-10-24 143327](https://github.com/user-attachments/assets/75d77736-d19a-45ef-a6ce-b3c4af72f441)
 
 Mengecek kolom yang isi barisnya kurang dari 2000. Karena jenis ``` genres ``` sangat bervariasi dengan jumlah data yang puluhan ribu, sehingga proyek ini hanya menggunakan data dengan ``` genres ``` yang lebih dari 1 dan kurang dari 2000.
+``` value_jum=dt_br['genres'].value_counts()
+hasil=value_jum[value_jum<2000]
+print("kolom genres yang jumlah barisnya kurang 2000: ")
+print(hasil) 
+```
+``` Kolom genres yang jumlah barisnya kurang 2000: ```
 
-![Screenshot 2024-10-24 143409](https://github.com/user-attachments/assets/e6278bb5-d880-4d9f-8eb5-41e405532e6a)
+![jumlahmovie](https://github.com/user-attachments/assets/f60e3566-3bee-4209-9316-f78b1e65419e)
 
 Menghapus baris yang jumlah 1 dan lebih dari 2000 adalah ```imax``` dengan jumlah hanya 1, dengan fungsi 
 
@@ -242,7 +248,7 @@ Hasil dari tahapan di atas kemudian digunakan sebagai data training dan testing,
 
 ## Membuat Model
 ### Model Content Based Filtering
-Matrik DataFrame di atas ditampilkan sebanyak 10 movie dan 10 jenis genres (nilai korelasi antara movie dengan jenis genres). Selanjutnya melakukan perhitungan derajat kesamaan antar movie dengan fungsi cosine similarity dari library sklearn, dengan perintah dan hasil berikut:
+Matrik DataFrame fitur (TF-IDF) berukuran 10 movie dan 10 jenis genres (nilai korelasi antara movie dengan jenis genres). Selanjutnya melakukan perhitungan derajat kesamaan antar movie dengan fungsi cosine similarity dari library sklearn, cosine similarity adalah menghitung sudut antara dua vektor (antar movie), dengan perintah dan hasil berikut:
 
 ![Screenshot 2024-10-24 162444](https://github.com/user-attachments/assets/a147cdf6-25b5-4ad3-a89f-1f9fe124980e)
 
@@ -250,13 +256,24 @@ Cosine similarity menghasilkan matriks kesamaan antar movie dalam bentuk array. 
 
 ![Screenshot 2024-10-24 162958](https://github.com/user-attachments/assets/c25a1586-7d6e-4551-b723-37533668f274)
 
-Model yang dibangun adalah sistem rekomendasi dengan pendekatan content based filtering. Model yang dibagun adalah sistem rekomendasi movie berdasarkan jenis genres yang ada dalam tabel ``` movies.csv ```. Selanjutnya dari data array cosine similarity di atas dapat digunakan sebagai proses rekomendasi movie yang mempunyai kesamaan. Proses rekomendasi berdasarkan movie yang pernah ditonton pengguna yang mempunyai kesamaan menggunakan ``` def movie_recommendations() ```. Proses rekomendasi berdasarkan parameter judul movie (title), nilai kesamaan (cosine similarity), items (fitur judul movie yang mempunyai kesamaan), dan k (banyaknya movie yang direkomendasikan). Perintah mencari rekomendasi movie yang mirip dengan 'Shark Lake (2015)' dan hasilnya seperti berikut:
+Model yang dibangun adalah sistem rekomendasi dengan pendekatan content based filtering. Model yang dibagun adalah sistem rekomendasi movie berdasarkan jenis genres yang ada dalam tabel ``` movies.csv ```. Selanjutnya dari data array cosine similarity di atas dapat digunakan sebagai proses rekomendasi movie yang mempunyai kesamaan. Proses rekomendasi berdasarkan movie yang pernah ditonton pengguna yang mempunyai kesamaan menggunakan ``` def movie_recommendations() ```. 
+```
+def movie_recommendations(judul, similarity_data=cosine_sim_df, items=movie_data[['judul', 'jenis']], k=5):
+    index = similarity_data.loc[:,judul].to_numpy().argpartition(range(-1, -k, -1))
+    closest = similarity_data.columns[index[-1:-(k+2):-1]]
+    closest = closest.drop(judul, errors='ignore')
+    return pd.DataFrame(closest).merge(items).head(k)
+```
+Proses rekomendasi berdasarkan parameter judul movie (title), nilai kesamaan (cosine similarity), items (fitur judul movie yang mempunyai kesamaan), dan k (banyaknya movie yang direkomendasikan). 
+
+### Hasil Rekomendasi Metode Content Based Filtering
+Perintah mencari rekomendasi movie yang mirip dengan 'Shark Lake (2015)' dan hasilnya seperti berikut:
 
 ![Screenshot 2024-10-24 163712](https://github.com/user-attachments/assets/b9c66733-0893-4961-8a15-c234a66653ef)
 
 ![Screenshot 2024-10-24 163824](https://github.com/user-attachments/assets/59046d6d-b4bd-45b8-8d91-12d40ac9d8fa)
 
-Berdasarkan hasil rekomendasi di atas, proyek ini akan menampilkan movie yang mempunyai genres yang mirip dengan movie yang dicari ``` 'Shark Lake (2015)' ```.
+Berdasarkan hasil rekomendasi di atas, proyek ini akan menampilkan movie yang mempunyai genres yang mirip dengan movie yang dicari ``` 'Shark Lake (2015)' ``` sebanyak k=5.
 
 ### Model Collaborative Filtering
 Proses training menggunakan ``` class RecommenderNet(Model) ```, dengan library ``` import tensorflow ``` dan ``` from tensorflow import keras ```. Model ini akan melakukan teknik embeding dengan menghitung nilai kecocokan antara user dan movie.
