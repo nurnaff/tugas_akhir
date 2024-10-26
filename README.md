@@ -1,8 +1,7 @@
 # tugas_akhir
 # Laporan Proyek Machine Learning - Nur Nafiiyah 
 ## Domain Proyek
-Pertumbuhan teknologi yag pesat menyebabkan peningkatan data dari web, misal e-commerce, film, musik, dan permainan. Masalah utama dalam sistem rekomendasi adalah memberikan informasi yang tepat dari kumpulan data atau informasi. Sistem rekomendasi memberikan informasi dari perilaku histori konsumen/pengguna. Berbagai teknik rekomendasi telah diteliti dengan melihat konten dan berdasarkan kolaboratif, pengetahuan, dan demografi drai pengguna.
-Dalam dataset movie terdapat informasi terkait rating dari movie yang dilihat pengguna lain. Dari nilai rating yang diberikan pengguna, maka dapat digunakan sebagai salah satu cara memberikan rekomendasi ke pengguna lain berdasarkan item dan rating movie. Sistem rekomendasi memberikan saran berdasarkan aktivitas (history) sejumlah pengguna. Penelitian yang digunakan acuan adalah [ini link](https://www.sciencedirect.com/science/article/pii/S2666285X22000176)
+Pertumbuhan teknologi yag pesat menyebabkan peningkatan data dari web, misal e-commerce, film, musik, dan permainan. Masalah utama dalam sistem rekomendasi adalah memberikan informasi yang tepat dari kumpulan data atau informasi. Sistem rekomendasi memberikan informasi dari perilaku histori konsumen/pengguna. Berbagai teknik rekomendasi telah diteliti dengan melihat konten dan berdasarkan kolaboratif, pengetahuan, dan demografi dari pengguna. Dalam dataset movie terdapat informasi terkait rating dari movie yang dilihat pengguna lain. Dari nilai rating yang diberikan pengguna, maka dapat digunakan sebagai salah satu cara memberikan rekomendasi ke pengguna lain berdasarkan item dan rating movie. Sistem rekomendasi memberikan saran berdasarkan aktivitas (history) sejumlah pengguna dan rating movie. Penelitian yang digunakan acuan adalah [ini link](https://www.sciencedirect.com/science/article/pii/S2666285X22000176)
 
 ## Business Understanding
 Proyek ini menangani data dalam jumlah besar dan menyaring informasi yang berguna, merekomendasikan film serupa berdasarkan pilihan pengguna dan melakukan analisis pada ulasan film yang dipilih. Popularitas sebuah film didasarkan pada jenis ulasan yang didapatnya dari penonton. Ulasan-ulasan ini dapat mempengaruhi pilihan pengguna lain. Pengguna lebih cenderung memilih film yang direkomendasikan oleh kebanyakan orang. 
@@ -121,7 +120,7 @@ Hasil dari fungsi ``` describe() ``` adalah: ``` dt.describe() ```. Hasil tabel 
 
 | ratings.csv  | userId       | movieId   | rating    | timestamp   |
 |--------------|--------------|-----------|-----------|-------------|
-| count        | 25000100     | 25000100  | 25000100  | 25000100    |
+| count        | 25000095     | 25000095  | 25000095  | 25000095    |
 | mean         | 81189.28     | 21387.98  | 3.534     | 1215601000  |
 | std          | 46791.72     | 39198.86  | 1.061     | 226875800   |
 | min          | 1            | 1         | 0.5       | 789652000   |
@@ -295,8 +294,17 @@ Parameter ``` compile ``` menggunakan ``` loss function ``` adalah ``` keras.los
 ![Screenshot 2024-10-24 171536](https://github.com/user-attachments/assets/4e4db1fb-01f7-4877-a4f8-05403ec855bf)
 
 Tahap training membaca data sebanyak ``` batch_size=512 ``` dan melakukan perulangan epoch 10 kali.
+```
+history = model.fit(
+    x = x_train,
+    y = y_train,
+    batch_size = 512,
+    epochs = 10,
+    validation_data = (x_val, y_val)
+)
+```
 
-![Screenshot 2024-10-24 171702](https://github.com/user-attachments/assets/d1a7a991-8235-4715-af2b-81e5c70f4a28)
+![image](https://github.com/user-attachments/assets/ad6af00c-8254-4cd1-bed6-98f37dc17864)
 
 Proses training dilakukan sekalian dengan evaluasi testing, dengan diagram evaluasi nilai ``` roor_mean_squared_error ``` sebagai berikut
 
